@@ -1,53 +1,43 @@
 section .data
-    n dw 10        ; variável n na memória com valor 10
-    sqrts times 10 dw 0   ; vetor para armazenar os quadrados perfeitos
+    n dw 10
+    sqrts times 10 dw 0
 
 section .text
     global _start
 
 _start:
-    ; Carrega o valor de n da memória para um registrador
     mov ax, [n]
-
-    ; Inicializa um contador para 1
+    
     mov bx, 1
 
 loop:
-    ; Calcula o quadrado do contador
     mov cx, bx
     imul cx, bx
 
-    ; Armazena o quadrado no vetor
     mov word [sqrts + 2*bx - 2], cx
 
-    ; Imprime o resultado no terminal
     mov di, bx
     call print_num
     mov dx, msg
     mov ah, 09h
     int 21h
 
-    ; Imprime o quadrado perfeito no terminal
     mov di, cx
     call print_num
     mov dx, msg2
     mov ah, 09h
     int 21h
 
-    ; Incrementa o contador
     inc bx
 
-    ; Verifica se o contador é menor ou igual a n
     cmp bx, ax
     jle loop
 
-    ; Termina o programa
     mov eax, 1
     xor ebx, ebx
     int 80h
 
 print_num:
-    ; Converte um número de 16 bits em uma string e a imprime no terminal
     push ax
     push dx
 
