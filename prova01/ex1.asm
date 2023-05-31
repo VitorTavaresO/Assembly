@@ -9,7 +9,7 @@
 main:
     la      $t1, vector ## $t1 = &vector[]
     lw 	    $t2, n     ## $t2 = n = 9
-    li      $t3, 1    ## $t3 = 1 (Valor inicial do vetor)
+    li      $t3, 1    ## $t3 = 1 (Valor inicial dos quadrados perfeitos)
 
 loop:
     bge     $t0, $t2, exit ## Se $t0 >= $t2, pula para o exit
