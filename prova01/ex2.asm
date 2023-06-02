@@ -1,24 +1,24 @@
 .data
     vector: .word 19 54 95 96 2 61 70 33 18 52 15 39 62 48 50
     n:  .word 15
-    vector_String: .asciiz "Vetor: "
-    bigger_number_String: .asciiz "Maior numero: "
+    vector_string: .asciiz "Vetor: "
+    bigger_number_string: .asciiz "Maior numero: "
     comma: .asciiz ","
     newline: .asciiz "\n"
 
 .text
 
 main:
-    la      $t0, vector          ## $t0 = &vector[]
-    lw 	    $t1, n               ## $t2 = n = 15
-    li      $t2, 0               ## $t2 = 0
+    la      $t0, vector         ## $t0 = &vector[]
+    lw 	    $t1, n              ## $t2 = n = 15
+    li      $t2, 0
 
-    li      $v0, 4               ## Imprime string
-    la      $a0, vector_String   ## $a0 = &vector_String
+    li      $v0, 4              ## Imprime string
+    la      $a0, vector_string  ## $a0 = vector_string
     syscall
 
-    li      $t4, 0              ## $t4 = 0
-    li      $t5, 0              ## $t5 = 0
+    li      $t4, 0
+    li      $t5, 0
     la      $t7, vector         ## $t7 = &vector[]
 
 print_vector:
@@ -63,7 +63,7 @@ set_bigger_number:
     syscall
 
     li      $v0, 4              ## Imprime string
-    la      $a0, bigger_number_String        ## $a0 = &newline
+    la      $a0, bigger_number_string        ## $a0 = &bigger_number_string
     syscall
 
     li      $v0, 1              ## Imprime inteiro
