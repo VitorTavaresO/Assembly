@@ -1,5 +1,5 @@
 .data
-    vector: .word 61 33 18 2 52
+    vector: .word  18 33 61 52 2
     n:  .word 5
     vector_string: .asciiz "Vetor: "
     vector_ordened_String: .asciiz "Vetor ordenado: "
@@ -31,12 +31,14 @@ define_index:
 	move 	$t2, $t3 	  ## $t2 = $t3
 	add 	$t0, $t0, 4 	  ## $t0 = $t0 + 4
 	add 	$t4, $t4, 1 	  ## $t4 = $t4 + 1
+	mul     $t5, $t4, 4         ## $t5 = $t4 * 4
 	j 		inner_loop
 
 swap:
 	add 	$t0, $t0, -20  	  ## $t0 = $t0 - 4
 	sw      $t2, ($t0)          ## vector[i] = $t2
-	sw 		$t6, 12($t0)         ## vector[i+1] = $t3
+	add 	$t0, $t0, $t5 	  ## $t0 = $t0 + 4
+	sw 		$t6, ($t0)        ## vector[i+1] = $t3
 
 	li		$v0, 1
 	move	$a0, $t2
