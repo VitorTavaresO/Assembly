@@ -14,10 +14,7 @@ main:
     lw      $t3, 4($t0)         ## $t3 = vector[i+1]
     li      $t4, 0              ## $t4 = 1
 	move 	$t6, $t2
-    
-##loop:
-    ##bge     $t4, $t1, exit      ## Se $t0 >= $t2, pula para o exit
-	##lw      $t2, ($t0)          ## $t2 = vector[i]
+	li 		$t9, 0
 
 inner_loop:
 	bge     $t4, $t1, swap      ## Se $t0 >= $t1, pula para o exit
@@ -35,22 +32,11 @@ define_index:
 	j 		inner_loop
 
 swap:
-	add 	$t0, $t0, -20  	  ## $t0 = $t0 - 4
+	mul 	$t8, $t1, -4 	  ## $t5 = $t8 * 4
+	add 	$t0, $t0, $t8  	  ## $t0 = $t0 - 4
 	sw      $t2, ($t0)          ## vector[i] = $t2
 	add 	$t0, $t0, $t5 	  ## $t0 = $t0 + 4
 	sw 		$t6, ($t0)        ## vector[i+1] = $t3
-
-	li		$v0, 1
-	move	$a0, $t2
-	syscall
-
-	j       exit
-
-
-##exit_loop:
-	##add     $t0, $t0, 4         ## $t0 = $t0 + 4
-    ##add     $t4, $t4, 1         ## $t4 = $t4 + 1
-    ##j       loop
 
 exit:
 
