@@ -9,19 +9,18 @@
 .text
 main:
     la $t0, vector
-	la $t9, vector
 	lw $t1, n
     li $t2, 0
-	li $t8, 0
+		la $t8, vector
 
 	li      $v0, 4              ## Imprime string
     la      $a0, string_vector        ## $a0 = &comma
     syscall
 
 print_vector:
-    bge     $t8, $t1, outer_loop ## Se $t5 >= $t3, pula para o loop_vector
+    bge     $t2, $t1, exit_print_vector ## Se $t5 >= $t3, pula para o loop_vector
 
-    lw      $t5, ($t9) 	        ## $t5 = vetor[$t3]
+    lw      $t5, ($t8) 	        ## $t5 = vetor[$t3]
 	
     li      $v0, 1              ## Imprime inteiro
     move    $a0, $t5            ## $a0 = $t2
@@ -31,14 +30,20 @@ print_vector:
     la      $a0, comma         ## $a0 = &comma
     syscall
 
-    add     $t8, $t8, 1         ## Incrementa o contador do laço
-    add     $t9, $t9, 4         ## $t3 = $t3 + 4 (Move para o próximo elemento do vetor)
+    add     $t2, $t2, 1         ## Incrementa o contador do laço
+    add     $t8, $t8, 4         ## $t3 = $t3 + 4 (Move para o próximo elemento do vetor)
     j       print_vector       ## Volta para o início do laço
 
 exit_print_vector:
 	li      $v0, 4              ## Imprime string
-	la      $a0, newline        ## $a0 = &comma
-	syscall
+    la      $a0, newline        ## $a0 = &comma
+    syscall
+
+	li      $v0, 4              ## Imprime string
+    la      $a0, string_vector2        ## $a0 = &comma
+    syscall
+
+	sub 	$t2, $t2, $t1
 
 outer_loop:
     bge $t2, $t1, end_outer_loop
@@ -79,14 +84,6 @@ end_outer_loop:
     la $s0, vector
     li $t3, 1
     lw $t5, n
-
-	li      $v0, 4              ## Imprime string
-    la      $a0, newline        ## $a0 = &comma
-    syscall
-
-	li      $v0, 4              ## Imprime string
-    la      $a0, string_vector2        ## $a0 = &comma
-    syscall
 
 	sub 	$t2, $t2, $t1
    
