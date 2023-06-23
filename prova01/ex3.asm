@@ -69,7 +69,7 @@ smaller:
     
 swap:
     la $s0, ($t0)				## resultAdress = &vector[j]
-    lw $s1, ($s0)				## resultValue = vetor[j]
+    lw $s1, ($t0)				## resultValue = vetor[j]
 
     beq $s1, $t5, end_inner_loop	## Se resultValue == smaller, pula para o end_inner_loop
 
