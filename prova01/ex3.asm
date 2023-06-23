@@ -14,7 +14,7 @@ main:
     li $t4, 0					## j = 0 (Contador do laço interno)
 
 	li      $v0, 4              ## Imprime string
-    la      $a0, string_vector  ## $a0 = &string_vector = "Vetor Original:"
+    la      $a0, string_vector  ## &string_vector = "Vetor Original:"
     syscall
 
 print_vector:
