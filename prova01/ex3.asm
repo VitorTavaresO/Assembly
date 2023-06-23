@@ -8,99 +8,99 @@
 
 .text
 main:
-    la $t0, vector				## $t0 = &vector
-	lw $t1, n					## $t1 = n = 10 (Tamanho do vetor)
-    li $t2, 0					## $t0 = 0 (Contador de todos os laços)
-	la $t8, vector				## $t8 = &vector (Endereço do vetor para o primeiro print)
+    la $t0, vector				## &vector[] 
+	lw $t1, n					## vectorSize = n = 15 (Tamanho do vetor)
+    li $t2, 0					## i = 0 (Contador do laço externo)
+    li $t4, 0					## j = 0 (Contador do laço interno)
 
 	li      $v0, 4              ## Imprime string
     la      $a0, string_vector  ## $a0 = &string_vector = "Vetor Original:"
     syscall
 
 print_vector:
-    bge     $t2, $t1, exit_print_vector ## Se $t2 >= $t1, pula para o exit_print_vector
+    bge     $t2, $t1, exit_print_vector ## Se i >= vectorSize, pula para o exit_print_vector
 
-    lw      $t5, ($t8) 	        ## $t5 = vetor[$t8]
+    lw      $t5, ($t0) 	        ## out = vetor[i]
 	
     li      $v0, 1              ## Imprime inteiro
-    move    $a0, $t5            ## $a0 = $t5 (Valor a ser imprimido)
+    move    $a0, $t5            ## out (Valor a ser imprimido)
     syscall
 
     li      $v0, 4              ## Imprime string
-    la      $a0, comma          ## $a0 = &comma = ","
+    la      $a0, comma          ## &comma = ","
     syscall
 
     add     $t2, $t2, 1         ## Incrementa o contador do laço
-    add     $t8, $t8, 4         ## $t8 = $t8 + 4 (Move para o próximo elemento do vetor)
+    add     $t0, $t0, 4         ## vector[i+4] (Move para o próximo elemento do vetor)
     j       print_vector        ## Volta para o início do laço
 
 exit_print_vector:
 	li      $v0, 4              ## Imprime string
-    la      $a0, newline        ## $a0 = &newline = "\n" (Quebra de linha)
+    la      $a0, newline        ## &newline = "\n" (Quebra de linha)
     syscall
 
 	li      $v0, 4              ## Imprime string
-    la      $a0, string_vector2 ## $a0 = &comma
+    la      $a0, string_vector2 ## &string_vector2 = "Vetor Ordenado:"
     syscall
 
-	sub 	$t2, $t2, $t1       ## $t2 = 0 (Reinicia o contador dos laços)
+	sub 	$t2, $t2, $t1       ## i = i - vectorSize (Zera o contador do laço externo)
+    la $t0, vector				## &vector[]
 
 outer_loop:
-    bge $t2, $t1, end_outer_loop ## Se $t2 >= $t1, pula para o end_outer_loop
-    la $t3, ($t0)				 ## $t3 = &vector[$t0]
-    add $t4, $t2, 0				 ## $t4 = $t2 (Contador do laço)
-    lw $t5, ($t0)				 ## $t5 = vetor[$t0]
+    bge $t2, $t1, end_outer_loop ## Se i >= vectorSize, pula para o end_outer_loop
+    la $t3, ($t0)				 ## smallerAdress = &vector[i]
+    add $t4, $t2, 0				 ## j = i (Contador do laço interno)
+    lw $t5, ($t0)				 ## smaller = vector[i]
 
 inner_loop:
-    bge $t4, $t1, swap			## Se $t4 >= $t1, pula para o swap
-    lw $t6, ($t3)				## $t6 = vetor[$t3]
-    add $t4, $t4, 1				## $t4 = $t4 + 1 (Incrementa o contador do laço interno)
-    blt $t6, $t5, smaller		## Se $t6 < $t5, pula para o smaller
+    bge $t4, $t1, swap			## Se j >= vectorSize, pula para o swap
+    lw $t6, ($t3)				## outValue = vetor[j]
+    add $t4, $t4, 1				## j++ (Incrementa o contador do laço interno)
+    blt $t6, $t5, smaller		## Se outValue < smaller, pula para o smaller
 
-    add $t3, $t3, 4				## $t3 = $t3 + 4 (Move para o próximo elemento do vetor)
+    add $t3, $t3, 4				## vector[i+4] (Move para o próximo elemento do vetor)
     j inner_loop 				## Volta para o início do laço interno
 
 smaller:
-    add $t5, $t6, 0				## $t5 = $t6 (Valor a ser trocado)
-    la $t7, ($t3)				## $t7 = &vector[$t3]
-    add $t3, $t3, 4				## $t3 = $t3 + 4 (Move para o próximo elemento do vetor)
+    move $t5, $t6				## smaller = outValue (Valor a ser trocado)
+    la $t7, ($t3)				## aux = smallerAdress
+    add $t3, $t3, 4				## (Move para o próximo elemento do vetor)
     j inner_loop				## Volta para o início do laço interno
     
 swap:
-    la $s0, ($t0)				## $s0 = &vector[$t0]
-    lw $s1, ($s0)				## $s1 = vetor[$t0]
+    la $s0, ($t0)				## resultAdress = &vector[j]
+    lw $s1, ($s0)				## resultValue = vetor[j]
 
-    beq $s1, $t5, end_inner_loop	## Se $s1 == $t5, pula para o end_inner_loop
+    beq $s1, $t5, end_inner_loop	## Se resultValue == smaller, pula para o end_inner_loop
 
-    sw $t5, ($t0)				## vetor[$t0] = $t5
-    sw $s1, ($t7)				## vetor[$t7] = $s1
+    sw $t5, ($t0)				## vetor[i] = smaller
+    sw $s1, ($t7)				## vetor[aux] = resultValue
 
 end_inner_loop:
-    add $t0, $t0, 4				## $t0 = $t0 + 4 (Move para o próximo elemento do vetor)
-    add $t2, $t2, 1				## $t2 = $t2 + 1 (incrementa o contador do laço externo)
+    add $t0, $t0, 4				## (Move para o próximo elemento do vetor)
+    add $t2, $t2, 1				## (incrementa o contador do laço externo)
     j outer_loop
     
 end_outer_loop:
-    la $s0, vector				## $s0 = &vector
-    li $t3, 1					## $t3 = 1 (Contador do laço)
+    la $s0, vector				## &vector[i]
 
-	sub 	$t2, $t2, $t1
+	sub 	$t2, $t2, $t1       ## i = i - vectorSize (Zera o contador do laço externo)
    
 print_ordened_vector:
-    bge     $t2, $t1, exit ## Se $t2 >= $t1, pula para o exit
+    bge     $t2, $t1, exit      ## Se i >= vectorSize, pula para o exit
 
-    lw      $t5, ($s0) 	        ## $t5 = vetor[$s0]
+    lw      $t5, ($s0) 	        ## out = vetor[i]
 	
     li      $v0, 1              ## Imprime inteiro
-    move    $a0, $t5            ## $a0 = $t5 (Valor a ser imprimido)
+    move    $a0, $t5            ## out (Valor a ser imprimido)
     syscall
 
-    li      $v0, 4             ## Imprime string
-    la      $a0, comma         ## $a0 = &comma = ","
+    li      $v0, 4              ## Imprime string
+    la      $a0, comma          ## &comma = ","
     syscall
 
-    add     $t2, $t2, 1         ## $t2 = $t2 + 1 (incrementa o contador do laço do print)
-    add     $s0, $s0, 4         ## $s0 = $s0 + 4 (Move para o próximo elemento do vetor)
+    add     $t2, $t2, 1         ## (Incrementa o contador do laço do print)
+    add     $s0, $s0, 4         ## (Move para o próximo elemento do vetor)
     j       print_ordened_vector       ## Volta para o início do laço do print
 
    
