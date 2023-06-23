@@ -10,16 +10,14 @@
 
 main:
     la      $t0, vector         ## $t0 = &vector[]
-    lw 	    $t1, n              ## $t2 = n = 15
-    li      $t2, 0
+    lw 	    $t1, n              ## $t1 = n = 15 (Tamanho do vetor)
+    li      $t2, 0              ## $t0 = 0 (Contador do laço do print)
+    li      $t4, 0              ## $t4 = 0 (Contador do laço do loop_vector)
+    la      $t7, vector         ## $t7 = &vector[]
 
     li      $v0, 4              ## Imprime string
-    la      $a0, vector_string  ## $a0 = vector_string
+    la      $a0, vector_string  ## $a0 = vector_string = "Vetor: "
     syscall
-
-    li      $t4, 0
-    li      $t5, 0
-    la      $t7, vector         ## $t7 = &vector[]
 
 print_vector:
     bge     $t2, $t1, loop_vector ## Se $t2 >= $t1, pula para o loop_vector
@@ -27,11 +25,11 @@ print_vector:
     lw      $t3, ($t0)          ## $t3 = vector[$t0]
 
     li      $v0, 1              ## Imprime inteiro
-    move    $a0, $t3            ## $a0 = $t3
+    move    $a0, $t3            ## $a0 = $t3 (Valor a ser imprimido)
     syscall
 
     li      $v0, 4              ## Imprime string
-    la      $a0, comma          ## $a0 = &comma
+    la      $a0, comma          ## $a0 = &comma = ","
     syscall
 
     add     $t2, $t2, 1         ## Incrementa o contador do laço
@@ -51,7 +49,7 @@ loop_vector:
 
 
 set_bigger_number:
-    move    $t5, $t3            ## $t5 = $t3
+    move    $t5, $t3            ## $t5 = $t3 (Maior número)
 
     add     $t4, $t4, 1         ## Incrementa o contador do laço
     add     $t7, $t7, 4         ## $t1 = $t1 + 4 (Move para o próximo elemento do vetor)
@@ -59,15 +57,15 @@ set_bigger_number:
 
  exit:
     li      $v0, 4              ## Imprime string
-    la      $a0, newline        ## $a0 = &newline
+    la      $a0, newline        ## $a0 = &newline = "\n" (Pular uma linha)
     syscall
 
     li      $v0, 4              ## Imprime string
-    la      $a0, bigger_number_string        ## $a0 = &bigger_number_string
+    la      $a0, bigger_number_string        ## $a0 = &bigger_number_string = "Maior numero: "
     syscall
 
     li      $v0, 1              ## Imprime inteiro
-    move    $a0, $t5            ## $a0 = $t5
+    move    $a0, $t5            ## $a0 = $t5 (Valor a ser imprimido)
     syscall
 
     li      $v0, 10             ## Termina o programa
