@@ -2,9 +2,11 @@ EX 01 - Escreva um programa em assembly que receba dois números inteiros do usu
 
 EX 02 - Escreva um programa em assembly que calcule o fatorial de um número inteiro fornecido pelo usuário e exiba o resultado na tela.
 
-EX 03 - Escreva um programa em assembly que some todos os números contidos em um vetor de tamanho n e armazene novamente na memória principal.
+EX 03 - Escreva um programa em assembly que converta uma temperatura informada na memórial principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
 
-EX 04 - Escreva um programa em assembly que converta uma temperatura informada na memórial principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
+EX 04 - Escreva um programa em assembly que some todos os números contidos em um vetor de tamanho n e armazene novamente na memória principal.
+
+EX 05 - Escreva um programa em assembly que retorne a média de todos os números contidos dentro de um vetor na memória principal de tamanho m.
 
 EX 05 -Fazer um código assembly que escreva na memória primária um vetor contendo a sequência dos quadrados perfeitos de 1 até n, sendo n uma variável na memória. O valor do quadrado perfeito deverá ser calculado pelo código em execução.
 
