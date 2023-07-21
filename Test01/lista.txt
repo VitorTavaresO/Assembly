@@ -1,6 +1,6 @@
-EX 01 - Escreva um programa em assembly que receba dois números inteiros do usuário, some-os e exiba o resultado na tela.
+EX 01 - Escreva um programa em assembly que receba dois números inteiros, some-os e exiba o resultado na tela.
 
-EX 02 - Escreva um programa em assembly que calcule o fatorial de um número inteiro fornecido pelo usuário e exiba o resultado na tela.
+EX 02 - Escreva um programa em assembly que calcule o fatorial de um número inteiro fornecido na memória principal e exiba o resultado na tela.
 
 EX 03 - Escreva um programa em assembly que converta uma temperatura informada na memórial principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
 
