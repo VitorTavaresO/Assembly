@@ -2,7 +2,7 @@ EX 01 - Escreva um programa em assembly que receba dois números inteiros, some-
 
 EX 02 - Escreva um programa em assembly que calcule o fatorial de um número inteiro fornecido na memória principal e exiba o resultado na tela.
 
-EX 03 - Escreva um programa em assembly que converta uma temperatura informada na memórial principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
+EX 03 - Escreva um programa em assembly que converta uma temperatura informada na memória principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
 
 EX 04 - Escreva um programa em assembly que some todos os números contidos em um vetor de tamanho n e armazene novamente na memória principal.
 
