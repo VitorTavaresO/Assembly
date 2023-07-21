@@ -1,6 +1,7 @@
 .data  
     number1: .word 1    ## variavel number1 recebe o valor 1
     number2: .word 2    ## variavel number2 recebe o valor 2
+    
 .text
     lw $t0, number1     ## carrega o valor de number1 em $t0
     lw $t1, number2     ## carrega o valor de number2 em $t1
