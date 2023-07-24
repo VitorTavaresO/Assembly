@@ -4,6 +4,7 @@
     fahrenheit_String: .asciiz "F°"
     celsius_String: .asciiz "C°"
     newline: .asciiz "\n"
+    result: .word 0
 .text
     lw $t0, temperature             ## int temperatura = 40
 
@@ -32,6 +33,7 @@ to_celsius:
     sub $t0, $t0, 32                ## temperatura = temperatura - 32
     mul $t0, $t0, 5                 ## temperatura = temperatura * 5
     div $t0, $t0, 9                 ## temperatura = temperatura / 9
+    sw  $t0, result                 ## result = (temperatura - 32) * 5 / 9
 
     li $v0, 1                       ## valor para a chamada de sistema imprimir inteiro
     move $a0, $t0                   ## carrega o valor da variável para imprimir = temperatura
