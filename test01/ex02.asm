@@ -1,3 +1,4 @@
+## EX 02 - Escreva um programa em assembly que calcule o fatorial de um número inteiro fornecido na memória principal e exiba o resultado na tela.
 .data
     number: .word 5
     factorial_String: .asciiz "Fatorial de "

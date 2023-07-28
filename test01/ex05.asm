@@ -1,3 +1,4 @@
+## EX 05 - Escreva um programa em assembly que retorne a média de todos os números contidos dentro de um vetor na memória principal de tamanho n.
 .data
 
     vector: .word 27 58 93 14 76 41 85 3 67 9

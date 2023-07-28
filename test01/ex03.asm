@@ -1,3 +1,4 @@
+##EX 03 - Escreva um programa em assembly que converta uma temperatura informada na memória principal de Fahrenheit para Celsius e armazene o resultado de volta na memória.
 .data
     temperature: .word 40
     temperature_String: .asciiz "Temperatura: "

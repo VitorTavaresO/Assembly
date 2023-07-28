@@ -1,3 +1,4 @@
+## EX 04 - Escreva um programa em assembly que some todos os números contidos em um vetor de tamanho n e armazene novamente na memória principal.
 .data
 
     vector: .word 27 58 93 14 76 41 85 3 67 9

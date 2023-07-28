@@ -1,3 +1,4 @@
+## EX 06 -Fazer um código assembly que escreva na memória primária um vetor contendo a sequência dos quadrados perfeitos de 1 até n, sendo n uma variável na memória. O valor do quadrado perfeito deverá ser calculado pelo código em execução.
 .data
     vector: .word 0 0 0 0 0 0 0 0 0
     n:  .word 9

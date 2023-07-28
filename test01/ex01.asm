@@ -1,3 +1,5 @@
+##EX 01 - Escreva um programa em assembly que receba dois números inteiros, some-os e exiba o resultado na tela.
+
 .data  
     number1: .word 1    ## variavel number1 recebe o valor 1
     number2: .word 2    ## variavel number2 recebe o valor 2

@@ -1,3 +1,4 @@
+## EX 07 - Dado um vetor na memória com n elementos, elabore um código assembly que identifique o maior valor do vetor, onde n deverá ser especificado na memória. Imprimir o resultado usando chamadas de sistema.
 .data
     vector: .word 19 54 95 96 2 61 70 33 18 52 15 39 62 48 50
     n:  .word 15
